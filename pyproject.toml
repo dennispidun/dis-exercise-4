@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "exercise-4"
+version = "0.1.0"
+description = "Playground for distributed training learning"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "3.8.10"
+tensorflow = "^2.7.0"
+mnist = "^0.2.2"
+numpy = "^1.21.4"
+jiwer = "^2.3.0"
+pandas = "^1.3.4"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+black = "^21.11b1"
+mypy = "^0.910"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
