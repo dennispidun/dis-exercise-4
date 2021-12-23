@@ -1,4 +1,5 @@
 import pathlib
+import pickle
 import random
 import re
 import string
@@ -99,6 +100,20 @@ def eng_to_span_dataset(batch_size):
     train_spa_texts = [pair[1] for pair in train_pairs]
     eng_vectorization.adapt(train_eng_texts)
     spa_vectorization.adapt(train_spa_texts)
+
+    pickle.dump(
+        {
+            "weights": eng_vectorization.get_weights(),
+        },
+        open("eng_vec.pkl", "wb"),
+    )
+
+    pickle.dump(
+        {
+            "weights": spa_vectorization.get_weights(),
+        },
+        open("spa_vec.pkl", "wb"),
+    )
 
     """
     Next, we'll format our datasets.
@@ -299,4 +314,3 @@ def build_and_compile_transformer_model():
     )
 
     return transformer
-
