@@ -19,5 +19,5 @@ with strategy.scope():
     multi_worker_model = base.build_and_compile_transformer_model()
 
 
-multi_worker_model.fit(multi_worker_dataset, epochs=3, steps_per_epoch=70)
+multi_worker_model.fit(multi_worker_dataset, epochs=3)
 multi_worker_model.save_weights("weights")
