@@ -6,6 +6,6 @@ tf_config = {
     "task": {"type": "worker", "index": 0},
 }
 
-os.environ['TF_CONFIG'] = tf_config
+os.environ['TF_CONFIG'] = json.dumps(tf_config)
 
 print(json.dumps(tf_config))
