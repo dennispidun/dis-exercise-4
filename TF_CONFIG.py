@@ -2,7 +2,7 @@ import json
 import os
 
 tf_config = {
-    "cluster": {"worker": ["10.128.0.4:12345", "10.128.0.5:12345"]},
+    "cluster": {"worker": ["10.128.0.17:12345", "10.128.0.18:12345"]},
     "task": {"type": "worker", "index": 0},
 }
 
