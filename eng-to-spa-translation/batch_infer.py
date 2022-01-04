@@ -1,7 +1,6 @@
 import pickle
 import re
 import string
-import time
 
 import numpy as np
 import tensorflow as tf
@@ -51,27 +50,40 @@ spa_vocab = spa_vectorization.get_vocabulary()
 spa_index_lookup = dict(zip(range(len(spa_vocab)), spa_vocab))
 max_decoded_sentence_length = 20
 
-print(eng_vectorization("hello"))
-print(spa_vectorization("hola"))
 
+def decode_sequences(input_sentences):
+    tokenized_input_sequences = eng_vectorization(input_sentences)
+    decoded_sentences = ["[start]"] * len(input_sentences)
 
-def decode_sequence(input_sentence):
-    tokenized_input_sentence = eng_vectorization([input_sentence])
-    decoded_sentence = "[start]"
     for i in range(max_decoded_sentence_length):
-        tokenized_target_sentence = spa_vectorization([decoded_sentence])[:, :-1]
-        predictions = model([tokenized_input_sentence, tokenized_target_sentence])
-
-        sampled_token_index = np.argmax(predictions[0, i, :])
-        sampled_token = spa_index_lookup[sampled_token_index]
-        decoded_sentence += " " + sampled_token
-
-        if sampled_token == "[end]":
+        tokenized_target_sentences = spa_vectorization(decoded_sentences)[:, :-1]
+        predictions = model([tokenized_input_sequences, tokenized_target_sentences])
+        sampled_token_indices = np.argmax(predictions[:, i, :], axis=1)
+        sampled_tokens = [spa_index_lookup[word] for word in sampled_token_indices]
+        decoded_sentences = [
+            sentence + " " + sampled_token if not sampled_token == "[end]" else sentence
+            for sentence, sampled_token in zip(decoded_sentences, sampled_tokens)
+        ]
+        if all(token == "[end]" for token in sampled_tokens):
+            decoded_sentences = [sentence + " [end]" for sentence in decoded_sentences]
             break
-    return decoded_sentence
 
+    return decoded_sentences
+
+
+import time
 
 start = time.time()
-print(decode_sequence("i have a dog"))
+print(
+    decode_sequences(
+        [
+            "i have a dog",
+            "i have a cat",
+            "i have one cat and one dog",
+            "I have five different animals",
+            "I want to go on a trip to the carribeans",
+        ]
+    )
+)
 end = time.time()
 print(end - start)
