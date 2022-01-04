@@ -56,14 +56,20 @@ def eng_to_span_dataset(batch_size):
         print(random.choice(text_pairs))
 
     """
-    Now, let's split the sentence pairs into a training set, a validation set,
-    and a test set.
+    Now, let's split the sentence pairs into a training set, a validation set.
+    Normally, we also split into a test set as well, but we won't be doing that 
+    in this exercise
     """
 
     random.shuffle(text_pairs)
     num_val_samples = int(0.15 * len(text_pairs))
-    num_train_samples = len(text_pairs) - 2 * num_val_samples
+    num_train_samples = len(text_pairs) - 1 * num_val_samples
     train_pairs = text_pairs[:num_train_samples]
+    val_pairs = text_pairs[num_train_samples : num_train_samples + num_val_samples]
+
+    print(f"{len(text_pairs)} total pairs")
+    print(f"{len(train_pairs)} training pairs")
+    print(f"{len(val_pairs)} validation pairs")
 
     """
     ## Vectorizing the text data
@@ -147,7 +153,10 @@ def eng_to_span_dataset(batch_size):
         dataset = dataset.map(format_dataset)
         return dataset.shuffle(2048).prefetch(16).cache()
 
-    return make_dataset(train_pairs)
+    train_ds = make_dataset(train_pairs)
+    val_ds = make_dataset(val_pairs)
+
+    return train_ds, val_ds
 
 
 def build_and_compile_transformer_model():

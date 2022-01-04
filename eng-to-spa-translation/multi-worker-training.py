@@ -12,12 +12,12 @@ num_workers = len(tf_config["cluster"]["worker"])
 strategy = tf.distribute.MultiWorkerMirroredStrategy()
 
 global_batch_size = per_worker_batch_size * num_workers
-multi_worker_dataset = base.eng_to_span_dataset(global_batch_size)
+train_ds, val_ds = base.eng_to_span_dataset(global_batch_size)
 
 with strategy.scope():
     # Model building/compiling need to be within `strategy.scope()`.
     multi_worker_model = base.build_and_compile_transformer_model()
 
 
-multi_worker_model.fit(multi_worker_dataset, epochs=10)
+multi_worker_model.fit(train_ds, epochs=10, validation_data=val_ds)
 multi_worker_model.save_weights("weights")
