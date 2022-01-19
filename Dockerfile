@@ -1,14 +1,13 @@
 FROM tensorflow/tensorflow:latest-gpu
 
 RUN apt-get update && apt-get install -y \
-    git \
     libbz2-dev
 
 RUN mkdir -p /usr/bin/app
 
 WORKDIR /usr/bin/app
 
-RUN git clone https://github.com/bountrisv/dis-exercise-4.git
+COPY . dis-exercise-4
 
 WORKDIR /usr/bin/app/dis-exercise-4
 

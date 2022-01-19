@@ -1,0 +1,9 @@
+version: '3'
+services:
+  dis4:
+    container_name: dis-uebung-4
+    environment:
+      TF_CONFIG: '{"cluster": {"worker": ["10.186.0.6:2222", "10.186.0.7:2222", "10.186.0.8:2222", "10.186.0.9:2222"]}, "task": {"type": "worker", "index": 0}}'
+    build: .
+    ports:
+    - '2222:2222'

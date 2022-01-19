@@ -1,0 +1,9 @@
+/c/Users/Dennis/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud: line 41: /c/Users/Dennis/AppData/Local/Microsoft/WindowsApps/python3: Permission denied
+bash: line 0: cd: dis-exercise-4: No such file or directory
+ERROR: (gcloud.compute.ssh) [C:\Users\Dennis\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\sdk\plink.exe] exited with return code [1].
+/c/Users/Dennis/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud: line 41: /c/Users/Dennis/AppData/Local/Microsoft/WindowsApps/python3: Permission denied
+bash: line 0: cd: dis-exercise-4: No such file or directory
+ERROR: (gcloud.compute.ssh) [C:\Users\Dennis\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\sdk\plink.exe] exited with return code [1].
+/c/Users/Dennis/AppData/Local/Google/Cloud SDK/google-cloud-sdk/bin/gcloud: line 41: /c/Users/Dennis/AppData/Local/Microsoft/WindowsApps/python3: Permission denied
+bash: line 0: cd: dis-exercise-4: No such file or directory
+ERROR: (gcloud.compute.ssh) [C:\Users\Dennis\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\sdk\plink.exe] exited with return code [1].
